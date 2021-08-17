@@ -4,6 +4,7 @@ export interface Method {
   returnType: string;
   decorators?: Decorator[];
   description?: string;
+  rawdescription?: string;
 }
 
 export interface Property {
@@ -13,6 +14,7 @@ export interface Property {
   optional: boolean;
   defaultValue?: string;
   description?: string;
+  rawdescription?: string;
 }
 
 export interface Class {
@@ -66,10 +68,40 @@ export interface Decorator {
   name: string;
 }
 
+export interface TypeAlias {
+  name: string;
+  ctype: string;
+  subtype: string;
+  rawtype: string;
+  file: string;
+  kind: number;
+  description?: string;
+  rawdescription?: string;
+}
+
+export interface EnumType {
+  name: string;
+  childs: EnumTypeChild[];
+  ctype: string;
+  subtype: string;
+  file: string;
+  description?: string;
+  rawdescription?: string;
+}
+
+export interface EnumTypeChild {
+  name: string;
+  value?: string;
+}
+
 export interface CompodocJson {
   directives: Directive[];
   components: Component[];
   pipes: Pipe[];
   injectables: Injectable[];
   classes: Class[];
+  miscellaneous?: {
+    typealiases?: TypeAlias[];
+    enumerations?: EnumType[];
+  };
 }
